@@ -9,12 +9,9 @@ import Dashboard from "./pages/Dashboard";
 import CreateReservation from "./pages/CreateReservation";
 import ReservationHistory from "./pages/ReservationHistory";
 import Login from "./pages/Login";
-import { getCurrentWorker } from "./services/authService";
-
-const PrivateRoute = ({ children }) => {
-  const worker = getCurrentWorker();
-  return worker ? children : <Navigate to="/login" />;
-};
+import PrivateRoute from "./privateRoutes/PrivateRoute";
+import AdminPage from "./pages/AdminPage";
+import AdminRoute from "./privateRoutes/AdminRoutes";
 
 const App = () => {
   return (
@@ -31,6 +28,15 @@ const App = () => {
             <PrivateRoute>
               <Dashboard />
             </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminPage />
+            </AdminRoute>
           }
         />
 

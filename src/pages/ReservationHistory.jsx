@@ -1,7 +1,7 @@
 const ReservationHistory = () => {
   return (
     <div>
-      <h1>Crear reservas</h1>
+      <h1>historia de reservas</h1>
     </div>
   );
 };

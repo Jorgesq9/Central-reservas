@@ -1,39 +1,47 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginWorker } from "../services/authService";
+import { loginUser } from "../services/authservice";
+import { useState } from "react";
 
 const Login = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     try {
-      await loginWorker({ userName, password });
-      Navigate("/");
+      const userData = await loginUser(credentials);
+      localStorage.setItem("user", JSON.stringify(userData)); // Guarda el usuario en localStorage
+      navigate("/"); // Redirige al Dashboard
     } catch (error) {
-      alert("Error al iniciar sesion, verifica tus credenciales");
+      setError("Error al iniciar sesión. Verifica tus credenciales.");
+      console.error("Login error:", error.message);
     }
   };
+
   return (
     <div>
-      <h2>Inicio de Sesión</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Empleado"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Iniciar Sesión</button>
-      </form>
+      <h1>Iniciar Sesión</h1>
+      <input
+        type="text"
+        placeholder="Usuario"
+        value={credentials.username}
+        onChange={(e) =>
+          setCredentials({ ...credentials, username: e.target.value })
+        }
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={credentials.password}
+        onChange={(e) =>
+          setCredentials({ ...credentials, password: e.target.value })
+        }
+      />
+      <button onClick={handleLogin}>Iniciar Sesión</button>
+      {error && <p>{error}</p>}
     </div>
   );
 };
