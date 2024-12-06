@@ -5,6 +5,7 @@ import {
 } from "../services/reservationService";
 import ReservationList from "../components/ReservationList";
 import ReservationForm from "../components/ReservationForm";
+import "./PagesStyle.css";
 
 const Dashboard = () => {
   const [reservations, setReservations] = useState([]);
@@ -48,22 +49,28 @@ const Dashboard = () => {
   if (loading) return <p>Cargando reservas...</p>;
 
   return (
-    <div>
-      <h1>Central de Reservas</h1>
-      <ReservationList
-        reservations={reservations}
-        onEdit={handleEdit}
-        applyFilters={true}
-      />
-      {selectedReservation && (
-        <div>
-          <h2>Editar Reserva</h2>
-          <ReservationForm
-            reservation={selectedReservation}
-            onUpdate={handleUpdate}
+    <div className="page-container">
+      <div className="reservation-layout">
+        {/* Lista de Reservas */}
+        <div
+          className={`reservation-list ${selectedReservation ? "shrink" : ""}`}
+        >
+          <ReservationList
+            reservations={reservations}
+            onEdit={handleEdit}
+            applyFilters={true}
           />
         </div>
-      )}
+        {/* Formulario de Reservas */}
+        {selectedReservation && (
+          <div className="reservation-form">
+            <ReservationForm
+              reservation={selectedReservation}
+              onUpdate={handleUpdate}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

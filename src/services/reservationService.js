@@ -37,8 +37,8 @@ export const createReservation = async (reservationData) => {
 
     if (
       !reservationData.date ||
-      !reservationData.serviceType ||
-      !reservationData.clientId
+      !reservationData.serviceType
+      /* || !reservationData.clientId*/
     ) {
       throw new Error("Datos incompletos para la reserva.");
     }

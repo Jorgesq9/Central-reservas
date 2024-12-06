@@ -9,6 +9,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
+    window.location.reload();
   };
   return (
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>

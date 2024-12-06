@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../pages/PagesStyle.css";
 
 const ReservationList = ({
   reservations = [],
@@ -52,38 +53,50 @@ const ReservationList = ({
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Lista de Reservas</h2>
 
       {/* Filtros */}
       {applyFilters && (
-        <div>
-          <label>
-            Estado:
-            <select name="status" onChange={handleFilterChange}>
+        <div className="filters-container">
+          <div className="form-group">
+            <label htmlFor="status">Estado:</label>
+            <select id="status" name="status" onChange={handleFilterChange}>
               <option value="">Todos</option>
               <option value="pending">Pendiente</option>
               <option value="in_progress">En Progreso</option>
               <option value="completed">Completado</option>
             </select>
-          </label>
-          <label>
-            Prioridad:
-            <select name="priority" onChange={handleFilterChange}>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="priority">Prioridad:</label>
+            <select id="priority" name="priority" onChange={handleFilterChange}>
               <option value="">Todos</option>
               <option value="low">Baja</option>
               <option value="medium">Media</option>
               <option value="high">Alta</option>
             </select>
-          </label>
-          <label>
-            Fecha Inicio:
-            <input type="date" name="startDate" onChange={handleFilterChange} />
-          </label>
-          <label>
-            Fecha Fin:
-            <input type="date" name="endDate" onChange={handleFilterChange} />
-          </label>
+          </div>
+          <div className="form-group">
+            <label htmlFor="startDate">Fecha Inicio:</label>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              onChange={handleFilterChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="endDate">Fecha Fin:</label>
+            <input
+              type="date"
+              id="endDate"
+              name="endDate"
+              onChange={handleFilterChange}
+            />
+          </div>
         </div>
       )}
 
@@ -92,7 +105,7 @@ const ReservationList = ({
 
       {/* Tabla de Reservas */}
       {filteredReservations.length > 0 && (
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <th>Servicio</th>
@@ -100,7 +113,7 @@ const ReservationList = ({
               <th>Fecha</th>
               <th>Estado</th>
               <th>Prioridad</th>
-              <th>Acciones</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -111,8 +124,13 @@ const ReservationList = ({
                 <td>{new Date(reservation.date).toLocaleDateString()}</td>
                 <td>{reservation.status}</td>
                 <td>{reservation.priority}</td>
-                <td>
-                  <button onClick={() => onEdit(reservation)}>Editar</button>
+                <td className="action-buttons">
+                  <button
+                    className="button"
+                    onClick={() => onEdit(reservation)}
+                  >
+                    Editar
+                  </button>
                 </td>
               </tr>
             ))}

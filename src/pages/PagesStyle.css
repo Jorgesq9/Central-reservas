@@ -1,0 +1,233 @@
+/* Estilos generales para el contenedor principal de cada página */
+.reservation-layout {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+  transition: all 0.5s ease;
+}
+
+/* Lista de reservas (al principio ocupa más espacio, luego se reduce) */
+.reservation-list {
+  flex: 3;
+  transition: all 0.5s ease;
+}
+
+.reservation-list.shrink {
+  flex: 1; /* Reducir la lista de reservas para hacer espacio al formulario */
+}
+
+/* Formulario de reservas (aparece a la derecha) */
+.reservation-form {
+  flex: 2;
+  transition: all 0.5s ease;
+  opacity: 1;
+}
+
+/* Hacer el formulario visible con animación */
+.reservation-form.hidden {
+  opacity: 0; /* Ocultar si no está en uso */
+}
+
+/* Ajuste del contenedor principal */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a252f;
+  color: #ecf0f1;
+  padding: 40px 20px;
+}
+/*Login page*/
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #1a252f; /* Fondo oscuro */
+  color: #ecf0f1;
+  padding: 20px;
+}
+
+/* Estilo del formulario de Login */
+.login-form {
+  background-color: #2c3e50;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center; /* Centramos el texto del formulario */
+}
+
+/* Formulario estilo */
+.form-container {
+  background-color: #2c3e50;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.filters-container {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #2c3e50;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.filters-container .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo para formularios */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  color: #ecf0f1;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: 2px solid #3498db;
+}
+
+/* Botones generales */
+.button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+/* Títulos generales */
+h2 {
+  color: #ecf0f1;
+  margin-bottom: 20px;
+}
+
+/* Estilos generales para tablas */
+.table {
+  width: 80%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px; /* Espacio inferior para separar otros elementos */
+}
+
+.table thead {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #34495e;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #2e3b47; /* Alternar color de fila */
+}
+
+.table tbody tr:hover {
+  background-color: #3b4a58; /* Color al pasar el cursor */
+}
+
+/* Botones generales */
+.button {
+  background-color: #3498db; /* Color azul por defecto */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+.button-danger {
+  background-color: #e74c3c;
+}
+
+.button-danger:hover {
+  background-color: #c0392b;
+}
+
+.logout-button {
+  background-color: #e74c3c;
+  border: none;
+  color: #ecf0f1;
+  padding: 10px;
+  width: 100%;
+  margin-top: 30px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* Estilo para el botón de menú hamburguesa y cerrar */
+.toggle-button {
+  background-color: transparent;
+  border: none;
+  color: #ecf0f1;
+  font-size: 2em; /* Puedes ajustar según quieras que se vea la hamburguesa */
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-button {
+  font-size: 2em; /* Tamaño del ícono de hamburguesa */
+}
+
+.close-button {
+  font-size: 1.5em; /* Tamaño de la "X" */
+}

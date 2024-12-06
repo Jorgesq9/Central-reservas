@@ -22,26 +22,37 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Iniciar Sesión</h1>
-      <input
-        type="text"
-        placeholder="Usuario"
-        value={credentials.username}
-        onChange={(e) =>
-          setCredentials({ ...credentials, username: e.target.value })
-        }
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={credentials.password}
-        onChange={(e) =>
-          setCredentials({ ...credentials, password: e.target.value })
-        }
-      />
-      <button onClick={handleLogin}>Iniciar Sesión</button>
-      {error && <p>{error}</p>}
+    <div className="login-container">
+      <div className="login-form">
+        <h1>Iniciar Sesión</h1>
+        <div className="form-group">
+          <label htmlFor="username">Nombre de Usuario</label>
+          <input
+            type="text"
+            placeholder="Usuario"
+            value={credentials.username}
+            onChange={(e) =>
+              setCredentials({ ...credentials, username: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Contraseña</label>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={credentials.password}
+            onChange={(e) =>
+              setCredentials({ ...credentials, password: e.target.value })
+            }
+          />
+        </div>
+        <button className="button" onClick={handleLogin}>
+          Iniciar Sesión
+        </button>
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 };
