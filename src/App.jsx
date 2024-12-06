@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import { useState } from "react";
 import Dashboard from "./pages/Dashboard";
 import CreateReservation from "./pages/CreateReservation";
 import ReservationHistory from "./pages/ReservationHistory";
@@ -12,8 +13,14 @@ import Login from "./pages/Login";
 import PrivateRoute from "./privateRoutes/PrivateRoute";
 import AdminPage from "./pages/AdminPage";
 import AdminRoute from "./privateRoutes/AdminRoutes";
+import Sidebar from "./components/SideBar";
 
 const App = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
     <Router>
       <Routes>
@@ -26,6 +33,12 @@ const App = () => {
           path="/"
           element={
             <PrivateRoute>
+              <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+              <div
+                className={`page-content ${
+                  isSidebarOpen ? "sidebar-open" : "sidebar-closed"
+                }`}
+              ></div>
               <Dashboard />
             </PrivateRoute>
           }
@@ -35,6 +48,12 @@ const App = () => {
           path="/admin"
           element={
             <AdminRoute>
+              <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+              <div
+                className={`page-content ${
+                  isSidebarOpen ? "sidebar-open" : "sidebar-closed"
+                }`}
+              ></div>
               <AdminPage />
             </AdminRoute>
           }
@@ -44,6 +63,12 @@ const App = () => {
           path="/reservations/new"
           element={
             <PrivateRoute>
+              <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+              <div
+                className={`page-content ${
+                  isSidebarOpen ? "sidebar-open" : "sidebar-closed"
+                }`}
+              ></div>
               <CreateReservation />
             </PrivateRoute>
           }
@@ -53,6 +78,12 @@ const App = () => {
           path="reservations/history"
           element={
             <PrivateRoute>
+              <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+              <div
+                className={`page-content ${
+                  isSidebarOpen ? "sidebar-open" : "sidebar-closed"
+                }`}
+              ></div>
               <ReservationHistory />
             </PrivateRoute>
           }
