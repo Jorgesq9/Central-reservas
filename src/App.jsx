@@ -12,7 +12,7 @@ import ReservationHistory from "./pages/ReservationHistory";
 import Login from "./pages/Login";
 import PrivateRoute from "./privateRoutes/PrivateRoute";
 import AdminPage from "./pages/AdminPage";
-import AdminRoute from "./privateRoutes/AdminRoutes";
+import AdminRoutes from "./privateRoutes/AdminRoutes";
 import Sidebar from "./components/SideBar";
 
 const App = () => {
@@ -47,7 +47,7 @@ const App = () => {
         <Route
           path="/admin"
           element={
-            <AdminRoute>
+            <AdminRoutes>
               <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
               <div
                 className={`page-content ${
@@ -55,7 +55,7 @@ const App = () => {
                 }`}
               ></div>
               <AdminPage />
-            </AdminRoute>
+            </AdminRoutes>
           }
         />
 

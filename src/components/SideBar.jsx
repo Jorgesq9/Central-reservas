@@ -35,7 +35,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <a href="/reservations/history">Historial de Reservas</a>
             </li>
             <li>
-              <a href="/admin">Administración</a>
+              <a href="/admin">Eliminar Reservas</a>
             </li>
           </ul>
           <button onClick={handleLogout} className="logout-button">

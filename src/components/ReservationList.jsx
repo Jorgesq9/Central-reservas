@@ -17,6 +17,7 @@ const ReservationList = ({
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    // Ejecutar el filtrado solo si las dependencias cambian
     if (applyFilters) {
       const filtered = reservations.filter((reservation) => {
         const matchesStatus =
@@ -34,24 +35,33 @@ const ReservationList = ({
         );
       });
 
-      setFilteredReservations(filtered);
+      // Solo actualiza si los valores realmente cambian
+      if (JSON.stringify(filtered) !== JSON.stringify(filteredReservations)) {
+        setFilteredReservations(filtered);
+      }
 
-      if (filtered.length === 0) {
+      if (
+        filtered.length === 0 &&
+        message !== "No hay reservas con esas características."
+      ) {
         setMessage("No hay reservas con esas características.");
-      } else {
+      } else if (filtered.length > 0 && message) {
         setMessage("");
       }
     } else {
-      setFilteredReservations(reservations);
-      setMessage("");
+      if (
+        JSON.stringify(filteredReservations) !== JSON.stringify(reservations)
+      ) {
+        setFilteredReservations(reservations);
+      }
+      if (message) setMessage("");
     }
-  }, [filters, reservations, applyFilters]);
+  }, [filters, reservations, applyFilters, filteredReservations, message]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
-
   return (
     <div className="page-container">
       <h2>Lista de Reservas</h2>

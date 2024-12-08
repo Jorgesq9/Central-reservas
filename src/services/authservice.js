@@ -16,7 +16,7 @@ export const loginUser = async (credentials) => {
     localStorage.setItem(
       "user",
       JSON.stringify({
-        ...user, // Incluye id, username y role
+        ...user,
         token, // Agrega el token como parte del objeto
       })
     );
@@ -29,15 +29,20 @@ export const loginUser = async (credentials) => {
   }
 };
 
-export const logoutUser = () => {
-  localStorage.removeItem("user");
+export const getCurrentUser = () => {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      console.warn("No se encontró usuario en localStorage");
+      return null;
+    }
+    return user;
+  } catch (error) {
+    console.error("Error al recuperar el usuario de localStorage:", error);
+    return null;
+  }
 };
 
-export const getCurrentUser = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) return null;
-  return {
-    ...user,
-    token: user.token, // Si necesitas obtener el token también
-  };
+export const logoutUser = () => {
+  localStorage.removeItem("user");
 };

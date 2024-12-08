@@ -1,24 +1,42 @@
-import React from "react";
-import ReservationList from "../components/ReservationList";
-import ReservationForm from "../components/ReservationForm";
-
-import { deleteReservation } from "../services/reservationService";
-import { Navigate } from "react-router-dom";
-import { getCurrentUser } from "../services/authservice";
+import React, { useState, useEffect } from "react";
+import {
+  deleteReservation,
+  getReservations,
+} from "../services/reservationService";
+import AdminReservationList from "../components/AdminReservationList";
+import "../pages/PagesStyle.css";
 
 const AdminPage = () => {
-  const user = getCurrentUser;
+  const [reservations, setReservations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  if (!user || user.role !== "admin") {
-    alert("Acceso denegado:Solo administradores pueden acceder");
-    return <Navigate to="/login" />;
-  }
+  // Cargar todas las reservas al montar el componente
+  useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        const data = await getReservations(); // Llama al servicio que obtiene todas las reservas
+        setReservations(data);
+      } catch (error) {
+        console.error("Error al obtener las reservas:", error.message);
+        alert("No se pudieron cargar las reservas.");
+      } finally {
+        setLoading(false); // Oculta el indicador de carga
+      }
+    };
 
+    fetchReservations();
+  }, []);
+
+  // Manejo de eliminación de reservas
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar esta reserva?")) {
       try {
         await deleteReservation(id);
-        alert("Reserva eliminada con exito");
+        // Filtrar la reserva eliminada de la lista local
+        setReservations((prevReservations) =>
+          prevReservations.filter((reservation) => reservation._id !== id)
+        );
+        alert("Reserva eliminada con éxito");
       } catch (error) {
         console.error("Error eliminando la reserva:", error.message);
         alert("No se pudo eliminar la reserva");
@@ -26,14 +44,15 @@ const AdminPage = () => {
     }
   };
 
+  if (loading) {
+    return <div>Cargando reservas...</div>;
+  }
+
   return (
     <div>
-      <h1>Panel de Administración</h1>
-      {/* Reutilizamos ReservationList */}
-      <ReservationList
-        onDelete={handleDelete} // Añadimos la lógica de eliminación
-        allowDelete={true} // Habilitamos el botón de eliminar
-        applyFilters={true} // Habilitamos los filtros
+      <AdminReservationList
+        reservations={reservations} // Pasamos las reservas al componente
+        onDelete={handleDelete} // Lógica de eliminación
       />
     </div>
   );
