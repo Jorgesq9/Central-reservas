@@ -97,3 +97,21 @@ export const deleteReservation = async (id) => {
     throw error;
   }
 };
+
+export const getStatusHistory = async (reservationId) => {
+  try {
+    const token = getToken();
+    const response = await axios.get(`${API_URL}/${reservationId}/history`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error al obtener el historial de estado:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};

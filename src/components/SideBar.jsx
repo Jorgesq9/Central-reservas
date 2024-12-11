@@ -1,10 +1,15 @@
 // Sidebar.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./SidebarStyles.css";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const [isAdminMenuOpen, setIsAdminMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  const toggleAdminMenu = () => {
+    setIsAdminMenuOpen((prevState) => !prevState);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -35,7 +40,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <a href="/reservations/history">Historial de Reservas</a>
             </li>
             <li>
-              <a href="/admin">Eliminar Reservas</a>
+              <button className="admin-menu-button" onClick={toggleAdminMenu}>
+                Solo para Administradores {isAdminMenuOpen ? "▲" : "▼"}
+              </button>
+              {isAdminMenuOpen && (
+                <ul className="admin-submenu">
+                  <li>
+                    <a href="/admin">Eliminar</a>
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
           <button onClick={handleLogout} className="logout-button">
@@ -46,5 +60,4 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     </div>
   );
 };
-
 export default Sidebar;

@@ -6,7 +6,7 @@ const ReservationForm = ({ reservation, onUpdate }) => {
     serviceType: reservation.serviceType,
     clientName: reservation.client?.name || "",
     date: reservation.date.slice(0, 10),
-    status: reservation.status,
+    reservationStatus: reservation.reservationStatus,
     priority: reservation.priority,
   });
 
@@ -65,11 +65,11 @@ const ReservationForm = ({ reservation, onUpdate }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="status">Estado</label>
+          <label htmlFor="reservationStatus">Estado</label>
           <select
-            id="status"
-            name="status"
-            value={formData.status}
+            id="reservationStatus"
+            name="reservationStatus"
+            value={formData.reservationStatus}
             onChange={handleChange}
           >
             <option value="pending">Pendiente</option>

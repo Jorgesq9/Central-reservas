@@ -5,7 +5,7 @@ const AdminReservationList = ({ reservations = [], onDelete }) => {
   const [filteredReservations, setFilteredReservations] =
     useState(reservations);
   const [filters, setFilters] = useState({
-    status: "",
+    reservationStatus: "",
     priority: "",
     startDate: "",
     endDate: "",
@@ -15,7 +15,8 @@ const AdminReservationList = ({ reservations = [], onDelete }) => {
   useEffect(() => {
     const filtered = reservations.filter((reservation) => {
       const matchesStatus =
-        !filters.status || reservation.status === filters.status;
+        !filters.reservationStatus ||
+        reservation.reservationStatus === filters.reservationStatus;
       const matchesPriority =
         !filters.priority || reservation.priority === filters.priority;
       const matchesStartDate =
@@ -50,8 +51,12 @@ const AdminReservationList = ({ reservations = [], onDelete }) => {
       {/* Filtros */}
       <div className="filters-container">
         <div className="form-group">
-          <label htmlFor="status">Estado:</label>
-          <select id="status" name="status" onChange={handleFilterChange}>
+          <label htmlFor="reservationStatus">Estado:</label>
+          <select
+            id="reservationStatus"
+            name="reservationStatus"
+            onChange={handleFilterChange}
+          >
             <option value="">Todos</option>
             <option value="pending">Pendiente</option>
             <option value="in_progress">En Progreso</option>
@@ -111,7 +116,7 @@ const AdminReservationList = ({ reservations = [], onDelete }) => {
                 <td>{reservation.serviceType}</td>
                 <td>{reservation.client?.name}</td>
                 <td>{new Date(reservation.date).toLocaleDateString()}</td>
-                <td>{reservation.status}</td>
+                <td>{reservation.reservationStatus}</td>
                 <td>{reservation.priority}</td>
                 <td className="action-buttons">
                   <button

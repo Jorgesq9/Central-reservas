@@ -7,7 +7,7 @@ const CreateReservation = () => {
     clientName: "",
     serviceType: "",
     date: "",
-    status: "pending",
+    reservationStatus: "pending",
     priority: "low",
   });
 
@@ -33,7 +33,7 @@ const CreateReservation = () => {
         clientName: "",
         serviceType: "",
         date: "",
-        status: "pending",
+        reservationStatus: "pending",
         priority: "low",
       }); // Resetea el formulario después de la creación
     } catch (error) {
@@ -84,11 +84,11 @@ const CreateReservation = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="status">Estado</label>
+          <label htmlFor="reservationStatus">Estado</label>
           <select
-            id="status"
-            name="status"
-            value={formData.status}
+            id="reservationStatus"
+            name="reservationStatus"
+            value={formData.reservationStatus}
             onChange={handleChange}
           >
             <option value="pending">Pendiente</option>
