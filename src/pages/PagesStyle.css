@@ -1,3 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita desplazamientos horizontales no deseados */
+}
+
 /* Estilos generales para el contenedor principal de cada página */
 .reservation-layout {
   display: flex;
@@ -230,4 +242,75 @@ h2 {
 
 .close-button {
   font-size: 1.5em; /* Tamaño de la "X" */
+}
+
+/* Media queries*/
+
+@media (max-width: 1129px) and (min-width: 867px) {
+  .filters-container {
+    flex-direction: row; /* Filtros en fila */
+    justify-content: space-between; /* Espacio uniforme entre filtros */
+    align-items: center;
+    gap: 15px; /* Ajustar espacio entre los filtros */
+  }
+
+  .filters-container .form-group {
+    flex-direction: row; /* Cada filtro alineado horizontalmente */
+    align-items: center;
+    margin-bottom: 0; /* Eliminar margen inferior */
+  }
+
+  .filters-container label {
+    margin-right: 8px; /* Espacio entre el label y el input */
+  }
+
+  .filters-container input,
+  .filters-container select {
+    flex: 1; /* Ajustar el tamaño para que ocupen un espacio proporcional */
+  }
+}
+@media (min-width: 868px) and (max-width: 940px) {
+  .filters-container {
+    flex-direction: row; /* Mantener los filtros en una fila horizontal */
+    flex-wrap: wrap; /* Permitir que los filtros salten a la siguiente línea si es necesario */
+    justify-content: space-between; /* Espacio uniforme entre ellos */
+    gap: 10px; /* Ajustar el espacio entre los filtros */
+    padding: 10px;
+  }
+
+  .filters-container .form-group {
+    width: calc(
+      50% - 10px
+    ); /* Cada filtro ocupa el 50% del ancho disponible menos el gap */
+    flex-direction: column; /* Apilar el label y el input/select */
+    align-items: flex-start;
+  }
+
+  .filters-container input,
+  .filters-container select {
+    width: 100%; /* Asegurar que los inputs y selects ocupen todo el ancho del filtro */
+  }
+}
+@media (max-width: 768px) {
+  .filters-container {
+    flex-direction: row; /* Los filtros se organizan horizontalmente */
+    flex-wrap: wrap; /* Permitir que los filtros salten a la siguiente línea si es necesario */
+    justify-content: center; /* Centrar los elementos horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    gap: 10px; /* Espacio entre los filtros */
+  }
+
+  .filters-container .form-group {
+    flex-direction: column; /* Cada filtro tiene label e input apilados */
+    align-items: center; /* Centrar los elementos dentro de cada filtro */
+  }
+
+  .filters-container label {
+    margin-bottom: 5px; /* Espacio entre el label y el input */
+  }
+
+  .filters-container input,
+  .filters-container select {
+    width: auto; /* Los inputs y selects tendrán un ancho automático */
+  }
 }

@@ -9,14 +9,17 @@ import "./PagesStyle.css";
 
 const Dashboard = () => {
   const [reservations, setReservations] = useState([]);
+  const [filteredReservations, setFilteredReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedReservation, setSelectedReservation] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchReservations = async () => {
       try {
         const data = await getReservations();
         setReservations(data);
+        setFilteredReservations(data); // Inicialmente, mostrar todas las reservas
       } catch (error) {
         console.error("Error loading the reservations");
       } finally {
@@ -27,6 +30,15 @@ const Dashboard = () => {
     fetchReservations();
   }, []);
 
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    setFilteredReservations(
+      reservations.filter((res) =>
+        res.client?.name?.toLowerCase().includes(term)
+      )
+    );
+  };
   const handleUpdate = async (updatedReservation) => {
     try {
       const updatedData = await updateReservation(
@@ -34,6 +46,9 @@ const Dashboard = () => {
         updatedReservation
       );
       setReservations((prev) =>
+        prev.map((res) => (res._id === updatedData._id ? updatedData : res))
+      );
+      setFilteredReservations((prev) =>
         prev.map((res) => (res._id === updatedData._id ? updatedData : res))
       );
       setSelectedReservation(null);
@@ -50,13 +65,22 @@ const Dashboard = () => {
 
   return (
     <div className="page-container">
+      <div className="filters-container">
+        <input
+          type="text"
+          placeholder="Search by client name..."
+          value={searchTerm}
+          onChange={handleSearch}
+          className="form-group"
+        />
+      </div>
       <div className="reservation-layout">
         {/* Lista de Reservas */}
         <div
           className={`reservation-list ${selectedReservation ? "shrink" : ""}`}
         >
           <ReservationList
-            reservations={reservations}
+            reservations={filteredReservations}
             onEdit={handleEdit}
             applyFilters={true}
           />
