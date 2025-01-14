@@ -1,6 +1,6 @@
 // Sidebar.jsx
 import React, { useState } from "react";
-import "./SidebarStyles.css";
+import "./SideBarStyles.css";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {

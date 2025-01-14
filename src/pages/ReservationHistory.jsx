@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getReservations } from "../services/reservationService";
 import { getStatusHistory } from "../services/reservationService";
-import "../pages/pagesStyle.css";
+import "./PagesStyle.css";
 
 const ReservationHistory = () => {
   const [reservations, setReservations] = useState([]);

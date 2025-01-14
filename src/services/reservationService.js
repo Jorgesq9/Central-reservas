@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/reservations";
+const API_URL = "http://5.175.47.216:5000/api/reservations";
 
 // Función auxiliar para obtener el token desde el usuario almacenado en localStorage
 const getToken = () => {
