@@ -33,7 +33,7 @@ Accede a la app en vivo:
 - Responsive design para escritorio y móvil
 
 ## 📂 Estructura del proyecto
-
+```bash
 Central-reservas/
 │── src/
 │ ├── components/ # Componentes reutilizables
@@ -45,6 +45,8 @@ Central-reservas/
 │── package.json # Dependencias y scripts
 │── vite.config.js # Configuración de Vite
 └── README.md # Este documento
+
+```
 
 ## 🚀 Cómo levantarlo localmente
 
