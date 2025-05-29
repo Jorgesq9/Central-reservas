@@ -5,7 +5,7 @@ Este proyecto es la interfaz de usuario del sistema de gestión de reservas, dis
 ## 🌐 Demo online
 
 Accede a la app en vivo:  
-👉 [https://centralreservas.jorgeesquivafullstack.es/login](https://centralreservas.jorgeesquivafullstack.es/login)
+👉 https://centralreservas.jorgeesquivafullstack.es/login
 
 ## 📦 Repositorio del backend
 
